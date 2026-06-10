@@ -87,26 +87,6 @@ Atendimento (1) → (N) Exame Laboratorial
 
 ---
 
-## Estrutura do Projeto
-
-```text
-sistema_de_saude/
-│
-├── backend/
-│   ├── src/
-│   ├── pom.xml
-│   └── application.properties
-│
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   └── package.json
-│
-└── README.md
-```
-
----
-
 ## Configuração do Banco de Dados
 
 O projeto utiliza PostgreSQL hospedado no Neon.
