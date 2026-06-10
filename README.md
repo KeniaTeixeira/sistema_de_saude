@@ -12,7 +12,7 @@ Projeto desenvolvido para a disciplina **Engenharia de Software II (ES2)** com o
 * Hibernate
 * PostgreSQL (Neon Database)
 * Maven
-* Swagger/OpenAPI
+* Swagger
 
 ### Frontend
 
@@ -168,10 +168,6 @@ mvn test
 ```
 
 ---
-
-## Autor
-
-Kenia Teixeira
 
 Disciplina: Engenharia de Software II
 
