@@ -52,9 +52,9 @@ jobs:
         working-directory: ./frontend
 
   # ========================================
-  # JOB 3: DEPLOY (CD)
+  # JOB 3: BUILD DOCKER + E2E
   # ========================================
-  deploy:
+  build:
     needs: [test-backend, test-frontend]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -71,10 +71,3 @@ jobs:
           curl -f http://localhost:8080/api/exames || exit 1
           curl -f http://localhost:3000 || exit 1
           docker compose down
-      - name: Push → Amazon ECR
-        run: |
-          aws ecr get-login-password | docker login ...
-          docker push $ECR_REGISTRY/saude-backend:latest
-          docker push $ECR_REGISTRY/saude-frontend:latest
-      - name: Deploy AWS ECS
-        run: aws ecs update-service --cluster saude-cluster --force-new-deployment
