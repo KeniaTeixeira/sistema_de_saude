@@ -1,4 +1,4 @@
-/home/kenia/Documentos/es2_trabalhopratico/sistema_de_saude/backend/src/test/java/com/es2/IntegracaoTest.java
-/home/kenia/Documentos/es2_trabalhopratico/sistema_de_saude/backend/src/test/java/com/es2/ExameLaboratorialControllerTest.java
-/home/kenia/Documentos/es2_trabalhopratico/sistema_de_saude/backend/src/test/java/com/es2/ProfissionalSaudeControllerTest.java
-/home/kenia/Documentos/es2_trabalhopratico/sistema_de_saude/backend/src/test/java/com/es2/AtendimentoControllerTest.java
+/Users/ana/PUC/sistema_de_saude/backend/src/test/java/com/es2/ProfissionalSaudeControllerTest.java
+/Users/ana/PUC/sistema_de_saude/backend/src/test/java/com/es2/ExameLaboratorialControllerTest.java
+/Users/ana/PUC/sistema_de_saude/backend/src/test/java/com/es2/AtendimentoControllerTest.java
+/Users/ana/PUC/sistema_de_saude/backend/src/test/java/com/es2/IntegracaoTest.java

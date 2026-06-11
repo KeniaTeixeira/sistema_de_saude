@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProfissionalSaudeController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Agenda Web API</a> &gt; <a href="index.source.html" class="el_package">com.es2.controller</a> &gt; <span class="el_source">ProfissionalSaudeController.java</span></div><h1>ProfissionalSaudeController.java</h1><pre class="source lang-java linenums">package com.es2.controller;
+
+import com.es2.model.ProfissionalSaude;
+import com.es2.repository.ProfissionalSaudeRepository;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping(&quot;/api/profissionais&quot;)
+@CrossOrigin(origins = &quot;*&quot;)
+public class ProfissionalSaudeController {
+
+    private final ProfissionalSaudeRepository repository;
+
+<span class="fc" id="L20">    public ProfissionalSaudeController(ProfissionalSaudeRepository repository) {</span>
+<span class="fc" id="L21">        this.repository = repository;</span>
+<span class="fc" id="L22">    }</span>
+
+    @PostMapping
+    public ResponseEntity&lt;ProfissionalSaude&gt; criar(
+            @Valid @RequestBody ProfissionalSaude profissional) {
+
+<span class="fc" id="L28">        ProfissionalSaude salvo = repository.save(profissional);</span>
+<span class="fc" id="L29">        return ResponseEntity.status(HttpStatus.CREATED).body(salvo);</span>
+    }
+
+    @GetMapping
+    public ResponseEntity&lt;List&lt;ProfissionalSaude&gt;&gt; listar() {
+<span class="fc" id="L34">        return ResponseEntity.ok(repository.findAll());</span>
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;?&gt; buscar(@PathVariable Long id) {
+<span class="fc" id="L39">        return repository.findById(id)</span>
+<span class="fc" id="L40">                .map(ResponseEntity::ok)</span>
+<span class="fc" id="L41">                .orElse(ResponseEntity.notFound().build());</span>
+    }
+
+    @GetMapping(&quot;/nome/{nome}&quot;)
+    public List&lt;ProfissionalSaude&gt; buscarPorNome(@PathVariable String nome) {
+<span class="nc" id="L46">        return repository.findByNomeContainingIgnoreCase(nome);</span>
+    }
+
+    @GetMapping(&quot;/categoria/{categoria}&quot;)
+    public List&lt;ProfissionalSaude&gt; buscarPorCategoria(@PathVariable String categoria) {
+<span class="nc" id="L51">        return repository.findByCategoriaIgnoreCase(categoria);</span>
+    }
+
+    @PutMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;?&gt; atualizar(
+            @PathVariable Long id,
+            @Valid @RequestBody ProfissionalSaude dados) {
+
+<span class="fc" id="L59">        return repository.findById(id)</span>
+<span class="fc" id="L60">                .map(profissional -&gt; {</span>
+
+<span class="fc" id="L62">                    profissional.setNome(dados.getNome());</span>
+<span class="fc" id="L63">                    profissional.setEndereco(dados.getEndereco());</span>
+<span class="fc" id="L64">                    profissional.setTelefone(dados.getTelefone());</span>
+<span class="fc" id="L65">                    profissional.setCategoria(dados.getCategoria());</span>
+
+<span class="fc" id="L67">                    return ResponseEntity.ok(repository.save(profissional));</span>
+                })
+<span class="fc" id="L69">                .orElse(ResponseEntity.notFound().build());</span>
+    }
+
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;?&gt; deletar(@PathVariable Long id) {
+
+<span class="fc" id="L75">        return repository.findById(id)</span>
+<span class="fc" id="L76">                .map(profissional -&gt; {</span>
+
+<span class="fc" id="L78">                    repository.delete(profissional);</span>
+
+<span class="fc" id="L80">                    return ResponseEntity.ok(</span>
+<span class="fc" id="L81">                            Map.of(&quot;mensagem&quot;,</span>
+                                    &quot;Profissional removido com sucesso&quot;));
+                })
+<span class="fc" id="L84">                .orElse(ResponseEntity.notFound().build());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
