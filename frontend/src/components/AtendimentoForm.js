@@ -59,9 +59,10 @@ function AtendimentoForm() {
       <form onSubmit={handleSubmit} className="form">
 
         <div className="form-group">
-          <label>Título *</label>
+          <label htmlFor="titulo">Título *</label>
 
           <input
+            id="titulo"
             type="text"
             required
             value={atendimento.titulo}
@@ -75,9 +76,10 @@ function AtendimentoForm() {
         </div>
 
         <div className="form-group">
-          <label>Data *</label>
+          <label htmlFor="data">Data *</label>
 
           <input
+            id="data"
             type="date"
             required
             value={atendimento.data}
@@ -91,9 +93,10 @@ function AtendimentoForm() {
         </div>
 
         <div className="form-group">
-          <label>Horário *</label>
+          <label htmlFor="horario">Horário *</label>
 
           <input
+            id="horario"
             type="time"
             required
             value={atendimento.horario}
@@ -107,9 +110,10 @@ function AtendimentoForm() {
         </div>
 
         <div className="form-group">
-          <label>Link Videoconferência</label>
+          <label htmlFor="linkVideoconferencia">Link Videoconferência</label>
 
           <input
+            id="linkVideoconferencia"
             type="text"
             value={atendimento.linkVideoconferencia}
             onChange={(e) =>
@@ -122,9 +126,10 @@ function AtendimentoForm() {
         </div>
 
         <div className="form-group">
-          <label>Receita</label>
+          <label htmlFor="receita">Receita</label>
 
           <textarea
+            id="receita"
             value={atendimento.receita}
             onChange={(e) =>
               setAtendimento({
@@ -136,9 +141,10 @@ function AtendimentoForm() {
         </div>
 
         <div className="form-group">
-          <label>Profissional</label>
+          <label htmlFor="profissional">Profissional</label>
 
           <select
+            id="profissional"
             value={atendimento.profissionalSaude?.id || ''}
             onChange={(e) =>
               setAtendimento({

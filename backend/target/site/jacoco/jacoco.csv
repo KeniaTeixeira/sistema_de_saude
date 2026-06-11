@@ -1,5 +1,5 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 Agenda Web API,com.es2.controller,ProfissionalSaudeController,10,90,0,0,2,23,2,8,2,8
-Agenda Web API,com.es2.controller,AtendimentoController,65,33,0,0,16,9,4,4,4,4
-Agenda Web API,com.es2.controller,ExameLaboratorialController,53,33,0,0,13,9,4,4,4,4
+Agenda Web API,com.es2.controller,AtendimentoController,0,98,0,0,0,25,0,8,0,8
+Agenda Web API,com.es2.controller,ExameLaboratorialController,0,86,0,0,0,22,0,8,0,8
 Agenda Web API,com.es2,SistemaDeSaudeApplication,5,3,0,0,2,1,1,1,1,1

@@ -51,9 +51,10 @@ function ExameForm() {
 
         <div className="form-group">
 
-          <label>Descrição</label>
+          <label htmlFor="descricao">Descrição</label>
 
           <input
+            id="descricao"
             type="text"
             value={exame.descricao}
             onChange={(e) =>
@@ -67,9 +68,10 @@ function ExameForm() {
 
         <div className="form-group">
 
-          <label>Psicologia</label>
+          <label htmlFor="psicologia">Psicologia</label>
 
           <input
+            id="psicologia"
             type="text"
             value={exame.psicologia}
             onChange={(e) =>
@@ -83,9 +85,10 @@ function ExameForm() {
 
         <div className="form-group">
 
-          <label>Atendimento</label>
+          <label htmlFor="atendimento">Atendimento</label>
 
           <select
+            id="atendimento"
             value={exame.atendimento?.id || ''}
             onChange={(e) =>
               setExame({

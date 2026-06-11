@@ -46,31 +46,31 @@ public class ExameLaboratorialController {
             @PathVariable Long id,
             @Valid @RequestBody ExameLaboratorial dados) {
 
-<span class="nc" id="L49">        return repository.findById(id)</span>
-<span class="nc" id="L50">                .map(exame -&gt; {</span>
+<span class="fc" id="L49">        return repository.findById(id)</span>
+<span class="fc" id="L50">                .map(exame -&gt; {</span>
 
-<span class="nc" id="L52">                    exame.setDescricao(dados.getDescricao());</span>
-<span class="nc" id="L53">                    exame.setPsicologia(dados.getPsicologia());</span>
-<span class="nc" id="L54">                    exame.setAtendimento(dados.getAtendimento());</span>
+<span class="fc" id="L52">                    exame.setDescricao(dados.getDescricao());</span>
+<span class="fc" id="L53">                    exame.setPsicologia(dados.getPsicologia());</span>
+<span class="fc" id="L54">                    exame.setAtendimento(dados.getAtendimento());</span>
 
-<span class="nc" id="L56">                    return ResponseEntity.ok(repository.save(exame));</span>
+<span class="fc" id="L56">                    return ResponseEntity.ok(repository.save(exame));</span>
                 })
-<span class="nc" id="L58">                .orElse(ResponseEntity.notFound().build());</span>
+<span class="fc" id="L58">                .orElse(ResponseEntity.notFound().build());</span>
     }
 
     @DeleteMapping(&quot;/{id}&quot;)
     public ResponseEntity&lt;?&gt; deletar(@PathVariable Long id) {
 
-<span class="nc" id="L64">        return repository.findById(id)</span>
-<span class="nc" id="L65">                .map(exame -&gt; {</span>
+<span class="fc" id="L64">        return repository.findById(id)</span>
+<span class="fc" id="L65">                .map(exame -&gt; {</span>
 
-<span class="nc" id="L67">                    repository.delete(exame);</span>
+<span class="fc" id="L67">                    repository.delete(exame);</span>
 
-<span class="nc" id="L69">                    return ResponseEntity.ok(</span>
-<span class="nc" id="L70">                            Map.of(&quot;mensagem&quot;,</span>
+<span class="fc" id="L69">                    return ResponseEntity.ok(</span>
+<span class="fc" id="L70">                            Map.of(&quot;mensagem&quot;,</span>
                                     &quot;Exame removido com sucesso&quot;));
                 })
-<span class="nc" id="L73">                .orElse(ResponseEntity.notFound().build());</span>
+<span class="fc" id="L73">                .orElse(ResponseEntity.notFound().build());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

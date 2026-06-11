@@ -50,9 +50,10 @@ function ProfissionalForm() {
       <form onSubmit={handleSubmit} className="form">
 
         <div className="form-group">
-          <label>Nome *</label>
+          <label htmlFor="nome">Nome *</label>
 
           <input
+            id="nome"
             type="text"
             required
             value={profissional.nome}
@@ -66,9 +67,10 @@ function ProfissionalForm() {
         </div>
 
         <div className="form-group">
-          <label>Endereço</label>
+          <label htmlFor="endereco">Endereço</label>
 
           <input
+            id="endereco"
             type="text"
             value={profissional.endereco}
             onChange={(e) =>
@@ -81,9 +83,10 @@ function ProfissionalForm() {
         </div>
 
         <div className="form-group">
-          <label>Email</label>
+          <label htmlFor="email">Email</label>
 
           <input
+            id="email"
             type="email"
             value={profissional.email}
             onChange={(e) =>
@@ -96,9 +99,10 @@ function ProfissionalForm() {
         </div>
 
         <div className="form-group">
-          <label>Telefone</label>
+          <label htmlFor="telefone">Telefone</label>
 
           <input
+            id="telefone"
             type="text"
             value={profissional.telefone}
             onChange={(e) =>
@@ -111,9 +115,10 @@ function ProfissionalForm() {
         </div>
 
         <div className="form-group">
-          <label>Categoria *</label>
+          <label htmlFor="categoria">Categoria *</label>
 
           <select
+            id="categoria"
             required
             value={profissional.categoria}
             onChange={(e) =>
