@@ -66,8 +66,13 @@ jobs:
         run: |
           docker compose up -d
           sleep 20
-          curl -f http://localhost:8080/api/profissionais || exit 1
-          curl -f http://localhost:8080/api/atendimentos || exit 1
-          curl -f http://localhost:8080/api/exames || exit 1
-          curl -f http://localhost:3000 || exit 1
+          curl -f http://localhost:8080/api/profissionais || (docker compose logs && exit 1)
+          curl -f http://localhost:8080/api/atendimentos || (docker compose logs && exit 1)
+          curl -f http://localhost:8080/api/exames || (docker compose logs && exit 1)
+          for i in $(seq 1 10); do
+            curl -sf http://localhost:3000 > /dev/null && break
+            echo "Aguardando frontend (tentativa $i)..."
+            sleep 3
+          done
+          curl -f http://localhost:3000 || (docker compose logs && exit 1)
           docker compose down
