@@ -1,0 +1,80 @@
+name: CI/CD Pipeline - Sistema de Saúde (Java + React)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # ========================================
+  # JOB 1: TESTES DO BACKEND (Java/Spring Boot)
+  # ========================================
+  test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Testes Unitários (JUnit 5 + Mockito)
+        run: mvn test -Dtest="*ControllerTest" -B
+        working-directory: ./backend
+      - name: Testes de Integração (H2)
+        run: mvn test -Dtest="IntegracaoTest" -B
+        working-directory: ./backend
+      - name: Cobertura (JaCoCo)
+        run: mvn verify -B
+        working-directory: ./backend
+
+  # ========================================
+  # JOB 2: TESTES DO FRONTEND (React)
+  # ========================================
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: ./frontend/package-lock.json
+      - run: npm ci
+        working-directory: ./frontend
+      - name: Testes Jest
+        run: npm test -- --coverage --watchAll=false
+        working-directory: ./frontend
+      - name: Build React
+        run: npm run build
+        working-directory: ./frontend
+
+  # ========================================
+  # JOB 3: DEPLOY (CD)
+  # ========================================
+  deploy:
+    needs: [test-backend, test-frontend]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker images
+        run: docker compose build
+      - name: Testes de Aceitação (E2E)
+        run: |
+          docker compose up -d
+          sleep 20
+          curl -f http://localhost:8080/api/profissionais || exit 1
+          curl -f http://localhost:8080/api/atendimentos || exit 1
+          curl -f http://localhost:8080/api/exames || exit 1
+          curl -f http://localhost:3000 || exit 1
+          docker compose down
+      - name: Push → Amazon ECR
+        run: |
+          aws ecr get-login-password | docker login ...
+          docker push $ECR_REGISTRY/saude-backend:latest
+          docker push $ECR_REGISTRY/saude-frontend:latest
+      - name: Deploy AWS ECS
+        run: aws ecs update-service --cluster saude-cluster --force-new-deployment
