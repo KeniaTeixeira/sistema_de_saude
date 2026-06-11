@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: saude-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    plan: free
+
+  - type: web
+    name: saude-frontend
+    runtime: docker
+    dockerfilePath: ./frontend/Dockerfile
+    plan: free
+    envVars:
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: saude-backend
+          property: host
