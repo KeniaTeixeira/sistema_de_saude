@@ -68,7 +68,7 @@ function ExameForm() {
 
         <div className="form-group">
 
-          <label htmlFor="psicologia">Psicologia</label>
+          <label htmlFor="psicologia">Posologia</label>
 
           <input
             id="psicologia"

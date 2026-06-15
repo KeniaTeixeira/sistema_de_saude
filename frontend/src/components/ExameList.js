@@ -39,7 +39,7 @@ function ExameList() {
         <thead>
           <tr>
             <th>Descrição</th>
-            <th>Psicologia</th>
+            <th>Posologia</th>
             <th>Atendimento</th>
             <th>Ações</th>
           </tr>
