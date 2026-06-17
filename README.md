@@ -1,32 +1,38 @@
 # Sistema de Saúde - ES2
 
-Projeto desenvolvido para a disciplina **Engenharia de Software II (ES2)** com o objetivo de implementar um sistema de gerenciamento de atendimentos na área da saúde utilizando arquitetura web.
+Sistema web para gerenciamento de profissionais de saúde, atendimentos e exames laboratoriais, desenvolvido para a disciplina de Engenharia de Software II (ES2).
 
-## Tecnologias Utilizadas
+## Tecnologias
 
-### Backend
+| Camada          | Tecnologia                  |
+| --------------- | --------------------------- |
+| Backend         | Java 17 + Spring Boot 3     |
+| Frontend        | React 18 + React Router DOM |
+| Banco de Dados  | PostgreSQL (Neon Database)  |
+| Build Backend   | Maven                       |
+| Build Frontend  | Node.js 20 + npm            |
+| Versionamento   | Git + GitHub                |
+| CI/CD           | GitHub Actions              |
+| Containers      | Docker + Docker Compose     |
+| Produção        | Render + Neon PostgreSQL    |
 
-* Java 17
-* Spring Boot 3
-* Spring Data JPA
-* Hibernate
-* PostgreSQL (Neon Database)
-* Maven
-* Swagger
+## Estrutura do Projeto
 
-### Frontend
-
-* React
-* Axios
-* React Router DOM
-
-### Testes
-
-* JUnit 5
-* Spring Boot Test
-* MockMvc
-
----
+```text
+sistema_de_saude/
+├── backend/                  # API REST (Java/Spring Boot)
+│   ├── pom.xml
+│   ├── Dockerfile
+│   └── src/
+├── frontend/                 # Interface Web (React)
+│   ├── package.json
+│   ├── Dockerfile
+│   └── src/
+├── docker-compose.yml
+├── .github/workflows/
+│   └── ci-cd.yml
+└── README.md
+```
 
 ## Funcionalidades
 
@@ -37,31 +43,12 @@ Projeto desenvolvido para a disciplina **Engenharia de Software II (ES2)** com o
 * Atualizar profissional
 * Excluir profissional
 
-Campos:
-
-* ID
-* Nome
-* Endereço
-* Email
-* Telefone
-* Categoria (Médico, Psicólogo, Fisioterapeuta)
-
 ### Atendimentos
 
 * Cadastrar atendimento
 * Consultar atendimento
 * Atualizar atendimento
 * Excluir atendimento
-
-Campos:
-
-* ID
-* Data
-* Horário
-* Título
-* Link de videoconferência
-* Receita/Orientação
-* Profissional responsável
 
 ### Exames Laboratoriais
 
@@ -70,85 +57,102 @@ Campos:
 * Atualizar exame
 * Excluir exame
 
-Campos:
-
-* ID
-* Descrição
-* Psicologia
-* Atendimento relacionado
-
----
-
 ## Modelo de Relacionamento
 
+```text
 Profissional de Saúde (1) → (N) Atendimento
 
 Atendimento (1) → (N) Exame Laboratorial
-
----
-
-## Configuração do Banco de Dados
-
-O projeto utiliza PostgreSQL hospedado no Neon.
-
-Exemplo de configuração:
-
-```properties
-spring.datasource.url=jdbc:postgresql://HOST:5432/DATABASE
-spring.datasource.username=USUARIO
-spring.datasource.password=SENHA
 ```
 
----
+## Como Executar (Desenvolvimento)
 
-## Executando o Backend
+### Utilizando Docker Compose
 
-Entrar na pasta:
+```bash
+docker compose up --build
+```
+
+Serviços disponíveis:
+
+* Frontend: http://localhost:3000
+* Backend: http://localhost:8080
+* PostgreSQL: localhost:5432
+
+### Executando Manualmente
+
+#### Backend
 
 ```bash
 cd backend
-```
-
-Instalar dependências e compilar:
-
-```bash
-mvn clean install
-```
-
-Executar:
-
-```bash
 mvn spring-boot:run
 ```
 
-A API ficará disponível em:
+Disponível em:
 
 ```text
 http://localhost:8080
 ```
 
----
+#### Frontend
 
-## Documentação Swagger
+```bash
+cd frontend
+npm install
+npm start
+```
 
-Após iniciar a aplicação:
+Disponível em:
+
+```text
+http://localhost:3000
+```
+
+## Como Executar Testes
+
+```bash
+# Backend (JUnit 5 + MockMvc)
+cd backend
+mvn test
+
+# Frontend (Jest)
+cd frontend
+npm test
+```
+
+## API
+
+Após iniciar o backend:
 
 ```text
 http://localhost:8080/swagger-ui.html
 ```
 
----
+## Deploy
 
-## Testes
+### Backend
 
-Executar todos os testes:
+https://sistema-de-saude-backend.onrender.com
 
-```bash
-mvn test
-```
+### API REST
 
----
+https://sistema-de-saude-backend.onrender.com/api/profissionais
 
-Disciplina: Engenharia de Software II
+https://sistema-de-saude-backend.onrender.com/api/atendimentos
 
-PUC Minas
+https://sistema-de-saude-backend.onrender.com/api/exames
+
+### Frontend
+
+https://sistema-de-saude-front.onrender.com/
+
+## Desenvolvido por
+
+* Kenia Teixeira de Paula
+* Ana Clara Iannini
+
+## Disciplina
+
+Engenharia de Software II (ES2)
+
+Pontifícia Universidade Católica de Minas Gerais – PUC Minas
